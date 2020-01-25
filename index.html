@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>WC-Checking-System</title>
+    <style>
+      body {
+        font-family: robot, sans-serif;
+        text-transform: uppercase;
+        background: grey;
+      }
+
+      main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <header>
+        <h1>wc checking system</h1>
+      </header>
+      <h2 id="isOpen"></h2>
+      <canvas id="imageOnCanvas" width="640" height="480"></canvas>
+    </main>
+
+    <script>
+      const canvas = document.getElementById("imageOnCanvas");
+      const ctx = canvas.getContext("2d");
+      const wcStatus = document.getElementById("isOpen");
+      const img = new Image();
+
+      setInterval(function() {
+        img.src = "room.jpg?" + new Date().getTime();
+      }, 2000);
+
+      img.addEventListener(
+        "load",
+        function() {
+          ctx.drawImage(img, 0, 0);
+          const myImageData = ctx.getImageData(50, 50, 20, 20);
+          const averageLuminance = myImageData.data.reduce((sum, current) => {
+            return sum + current / myImageData.data.length;
+          }, 0);
+          console.log(averageLuminance);
+
+          if (averageLuminance > 230) {
+            wcStatus.innerText = "zajęte";
+            wcStatus.style.color = "red";
+          } else {
+            wcStatus.innerText = "wolne";
+            wcStatus.style.color = "green";
+          }
+        },
+        false
+      );
+    </script>
+  </body>
+</html>
