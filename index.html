@@ -26,6 +26,10 @@
       #imageOnCanvas {
         display: none;
       }
+
+      #whenLeft {
+        font-size: 10rem;
+      }
     </style>
   </head>
 
@@ -36,6 +40,7 @@
       </header>
       <section>
         <p id="isOpen"></p>
+        <p id="whenLeft"></p>
       </section>
       <canvas id="imageOnCanvas" width="160" height="120"></canvas>
     </main>
@@ -44,6 +49,7 @@
       const canvas = document.getElementById("imageOnCanvas");
       const ctx = canvas.getContext("2d");
       const wcStatus = document.getElementById("isOpen");
+      const whenLeft = document.getElementById("whenLeft");
       const img = new Image();
       const brightRGBAmountIndicatesBusy = 420;
 
@@ -63,6 +69,14 @@
         return ctx.getImageData(50, 30, 60, 60).data;
       }
 
+      function getLeaveTime() {
+        if (whenLeft.innerText !== "") {
+          console.log('muka');
+          
+          whenLeft.innerText = "kuku";
+        }
+      }
+
       setInterval(function() {
         img.src = "lightSourceImage.jpg?" + new Date().getTime();
       }, 2000);
@@ -74,6 +88,7 @@
             "BrightRGBAmount",
             getBrightRGBAmount(getEstimationRectangleData())
           );
+          console.log("whenLeft", whenLeft.innerText);
 
           if (
             getBrightRGBAmount(getEstimationRectangleData()) >
@@ -84,6 +99,7 @@
           } else {
             wcStatus.innerText = "wolna";
             wcStatus.style.color = "green";
+            getLeaveTime();
           }
         },
         false
