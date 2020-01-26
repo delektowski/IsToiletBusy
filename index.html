@@ -18,16 +18,26 @@
         align-items: center;
         flex-direction: column;
       }
+
+      #isOpen {
+        font-size: 10rem;
+      }
+
+      #imageOnCanvas {
+        display: none;
+      }
     </style>
   </head>
 
   <body>
     <main>
       <header>
-        <h1>wc checking system</h1>
+        <h1>STATUS TOALETY</h1>
       </header>
-      <h2 id="isOpen"></h2>
-      <canvas id="imageOnCanvas" width="640" height="480"></canvas>
+      <section>
+        <p id="isOpen"></p>
+      </section>
+      <canvas id="imageOnCanvas" width="160" height="120"></canvas>
     </main>
 
     <script>
@@ -37,24 +47,25 @@
       const img = new Image();
 
       setInterval(function() {
-        img.src = "room.jpg?" + new Date().getTime();
+        img.src = "lightSourceImage.jpg?" + new Date().getTime();
       }, 2000);
 
       img.addEventListener(
         "load",
         function() {
           ctx.drawImage(img, 0, 0);
-          const myImageData = ctx.getImageData(50, 50, 20, 20);
+          const myImageData = ctx.getImageData(130, 70, 50, 30);
           const averageLuminance = myImageData.data.reduce((sum, current) => {
+            
             return sum + current / myImageData.data.length;
           }, 0);
           console.log(averageLuminance);
 
-          if (averageLuminance > 230) {
-            wcStatus.innerText = "zajęte";
+          if (averageLuminance > 220) {
+            wcStatus.innerText = "zajęta";
             wcStatus.style.color = "red";
           } else {
-            wcStatus.innerText = "wolne";
+            wcStatus.innerText = "wolna";
             wcStatus.style.color = "green";
           }
         },
