@@ -8,7 +8,6 @@
     <style>
       body {
         font-family: robot, sans-serif;
-        text-transform: uppercase;
         background: grey;
       }
 
@@ -21,6 +20,9 @@
 
       #isOpen {
         font-size: 10rem;
+        padding: 0;
+        margin: 0;
+        text-transform: uppercase;
       }
 
       #imageOnCanvas {
@@ -28,7 +30,9 @@
       }
 
       #whenLeft {
-        font-size: 10rem;
+
+        text-align: center;
+        font-size: 2rem;
       }
     </style>
   </head>
@@ -70,10 +74,14 @@
       }
 
       function getLeaveTime() {
-        if (whenLeft.innerText !== "") {
-          console.log('muka');
-          
-          whenLeft.innerText = "kuku";
+        if (wcStatus.innerText === "ZAJĘTA") {
+         const timeNow  = new Date();
+         const hour = timeNow.getHours();
+         const minutes = timeNow.getMinutes() <=9 ?
+         `0${timeNow.getMinutes()}`:timeNow.getMinutes();
+         const seconds = timeNow.getSeconds() <=9 ?
+         `0${timeNow.getSeconds()}`:timeNow.getSeconds()
+          whenLeft.innerText = `Godzina ostatnich odwiedzin: ${hour}:${minutes}:${seconds}`;
         }
       }
 
@@ -88,18 +96,18 @@
             "BrightRGBAmount",
             getBrightRGBAmount(getEstimationRectangleData())
           );
-          console.log("whenLeft", whenLeft.innerText);
 
           if (
             getBrightRGBAmount(getEstimationRectangleData()) >
             brightRGBAmountIndicatesBusy
           ) {
+            whenLeft.innerText = '';
             wcStatus.innerText = "zajęta";
             wcStatus.style.color = "red";
           } else {
+            getLeaveTime(); 
             wcStatus.innerText = "wolna";
             wcStatus.style.color = "green";
-            getLeaveTime();
           }
         },
         false
