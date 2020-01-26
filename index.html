@@ -54,7 +54,7 @@
         "load",
         function() {
           ctx.drawImage(img, 0, 0);
-          const myImageData = ctx.getImageData(130, 70, 50, 30);
+          const myImageData = ctx.getImageData(50, 30, 60, 60);
           const averageLuminance = myImageData.data.reduce((sum, current) => {
             
             return sum + current / myImageData.data.length;

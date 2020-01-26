@@ -1,2 +1,2 @@
 #!/bin/bash
- fswebcam -r 100x100 --loop 2 lightSourceImage.jpg
+ fswebcam -r 160x120 --loop 2 lightSourceImage.jpg
