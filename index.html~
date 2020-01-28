@@ -87,7 +87,7 @@
 
     setInterval(function () {
         img.src = "lightSourceImage.jpg?" + new Date().getTime();
-    }, 1000);
+    }, 2000);
 
     img.addEventListener(
         "load",
