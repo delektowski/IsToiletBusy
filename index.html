@@ -9,6 +9,7 @@
       content="no-cache, must-revalidate, post-check=0,
      pre-check=0"
     />
+    <link id="faviconIcon" rel="icon" href="wolne.png" sizes="228x228">
     <title id="tabTitle" >WC-Checking-System</title>
 
     <style>
@@ -60,9 +61,10 @@
       const wcStatus = document.getElementById("isOpen");
       const whenLeft = document.getElementById("whenLeft");
       const tabTitle = document.getElementById("tabTitle");
+      const faviconIcon = document.getElementById("faviconIcon");
       const img = new Image();
       const brightRGBAmountIndicatesBusy = 420;
-
+      console.log("faviconIcon", faviconIcon.attributes.href)
       function getBrightRGBAmount(imageData) {
         const amountOfAlphaChannelValues = 3600;
         return (
@@ -114,11 +116,13 @@
             whenLeft.innerText = "";
             wcStatus.innerText = "zajęta";
             wcStatus.style.color = "red";
+            faviconIcon.href = "zajete.png"
             tabTitle.innerText = "-WC-ZAJĘTE-";
           } else {
             getLeaveTime();
             wcStatus.innerText = "wolna";
             wcStatus.style.color = "green";
+            faviconIcon.href = "wolne.png"
             tabTitle.innerText = "+WC+WOLNE+";
           }
         },
