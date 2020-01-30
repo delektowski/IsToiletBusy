@@ -64,7 +64,6 @@
       const faviconIcon = document.getElementById("faviconIcon");
       const img = new Image();
       const brightRGBAmountIndicatesBusy = 420;
-      console.log("faviconIcon", faviconIcon.attributes.href)
       function getBrightRGBAmount(imageData) {
         const amountOfAlphaChannelValues = 3600;
         return (
@@ -94,7 +93,10 @@
               ? `0${timeNow.getSeconds()}`
               : timeNow.getSeconds();
           whenLeft.innerText = `Godzina ostatnich odwiedzin: ${hour}:${minutes}:${seconds}`;
+          return `od ${hour}:${minutes}:${seconds}`
         }
+        return "";
+      
       }
 
       setInterval(function() {
@@ -119,11 +121,11 @@
             faviconIcon.href = "zajete.png"
             tabTitle.innerText = "-WC-ZAJĘTE-";
           } else {
-            getLeaveTime();
+            
             wcStatus.innerText = "wolna";
             wcStatus.style.color = "green";
             faviconIcon.href = "wolne.png"
-            tabTitle.innerText = "+WC+WOLNE+";
+            tabTitle.innerText = `+WC+WOLNE+${getLeaveTime()}`;
           }
         },
         false
