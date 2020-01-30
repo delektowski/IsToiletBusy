@@ -93,9 +93,7 @@
               ? `0${timeNow.getSeconds()}`
               : timeNow.getSeconds();
           whenLeft.innerText = `Godzina ostatnich odwiedzin: ${hour}:${minutes}:${seconds}`;
-          return `od ${hour}:${minutes}:${seconds}`
         }
-        return "";
       
       }
 
@@ -121,11 +119,11 @@
             faviconIcon.href = "zajete.png"
             tabTitle.innerText = "-WC-ZAJĘTE-";
           } else {
-            
+            getLeaveTime(); 
             wcStatus.innerText = "wolna";
             wcStatus.style.color = "green";
             faviconIcon.href = "wolne.png"
-            tabTitle.innerText = `+WC+WOLNE+${getLeaveTime()}`;
+            tabTitle.innerText = "+WC+WOLNE+";
           }
         },
         false
