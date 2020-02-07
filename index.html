@@ -101,6 +101,10 @@
         img.src = "lightSourceImage.jpg?" + new Date().getTime();
       }, 1000);
 
+      setInterval(function() {
+        location.reload(true)
+      }, 900000);
+
       img.addEventListener(
         "load",
         function() {
