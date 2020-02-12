@@ -82,7 +82,7 @@
             .map(i => {
               return i;
             })
-            .filter(i => i > 30).length - amountOfAlphaChannelValues
+            .filter(i => i !== 0).length - amountOfAlphaChannelValues
         );
       }
 
@@ -120,7 +120,7 @@
           );
 
           console.log(
-            "aboveZeroRGBAmount",
+            "differZeroRGBAmount",
             getRGBAmount(getEstimationRectangleData())
           );
 
