@@ -9,8 +9,8 @@
       content="no-cache, must-revalidate, post-check=0,
      pre-check=0"
     />
-    <link id="faviconIcon" rel="icon" href="wolne.png" sizes="228x228">
-    <title id="tabTitle" >WC-Checking-System</title>
+    <link id="faviconIcon" rel="icon" href="wolne.png" sizes="228x228" />
+    <title id="tabTitle">WC-Checking-System</title>
 
     <style>
       body {
@@ -75,6 +75,17 @@
         );
       }
 
+      function getRGBAmount(imageData) {
+        const amountOfAlphaChannelValues = 3600;
+        return (
+          imageData
+            .map(i => {
+              return i;
+            })
+            .filter(i => i > 1).length - amountOfAlphaChannelValues
+        );
+      }
+
       function getEstimationRectangleData() {
         ctx.drawImage(img, 0, 0);
         return ctx.getImageData(50, 30, 60, 60).data;
@@ -94,7 +105,6 @@
               : timeNow.getSeconds();
           whenLeft.innerText = `Godzina ostatnich odwiedzin: ${hour}:${minutes}:${seconds}`;
         }
-      
       }
 
       setInterval(function() {
@@ -109,6 +119,11 @@
             getBrightRGBAmount(getEstimationRectangleData())
           );
 
+          console.log(
+            "aboveZeroRGBAmount",
+            getRGBAmount(getEstimationRectangleData())
+          );
+
           if (
             getBrightRGBAmount(getEstimationRectangleData()) >
             brightRGBAmountIndicatesBusy
@@ -116,13 +131,13 @@
             whenLeft.innerText = "";
             wcStatus.innerText = "zajęta";
             wcStatus.style.color = "red";
-            faviconIcon.href = "zajete.png"
+            faviconIcon.href = "zajete.png";
             tabTitle.innerText = "-WC-ZAJĘTE-";
           } else {
-            getLeaveTime(); 
+            getLeaveTime();
             wcStatus.innerText = "wolna";
             wcStatus.style.color = "green";
-            faviconIcon.href = "wolne.png"
+            faviconIcon.href = "wolne.png";
             tabTitle.innerText = "+WC+WOLNE+";
           }
         },
